@@ -166,7 +166,7 @@ public class SinglyLinkedList {
     public void traverse() {
         ListNode current = head;
         while (current.next != null) {
-            System.out.println(current.data + " ");
+            System.out.print(current.data + " ");
             current = current.next;
         }
         System.out.println(); //Print a newline to separate output from the program
