@@ -18,7 +18,7 @@ public class SinglyLinkedList {
      */
     private ListNode head; //We just need head in singly linked list because
     //the tail of this list will point to null.
-    
+
     public SinglyLinkedList() {
         head = null;
     }
@@ -134,7 +134,7 @@ public class SinglyLinkedList {
 
         previous.next = previous.next.next;
     }
-    
+
     public void insertLast(int value) {
         ListNode node = new ListNode(value);
         if (head == null) {
@@ -149,7 +149,7 @@ public class SinglyLinkedList {
         //Set the last node of the list to the new node.
         current.next = node;
     }
-    
+
     public void display() {
         ListNode current = head;
         while (current != null) {
@@ -159,7 +159,7 @@ public class SinglyLinkedList {
         System.out.println(" null");
         System.out.println();
     }
-    
+
     /**
      * Traverse a list
      */
@@ -171,60 +171,60 @@ public class SinglyLinkedList {
         }
         System.out.println(); //Print a newline to separate output from the program
     }
-    
-    
+
     public ListNode deleteFirst() {
         if (head == null) {
             return null;
         }
-        
+
         ListNode temp = head;
         head = head.next;
-        return head; 
-        
+        return head;
+
     }
-    
+
     public ListNode deleteLast() {
         //Check if the list is empty
         if (head == null) {
             return null;
         }
-        
+
         //Check if the list contains only 1 node
         if (head.next == null) {
             return null;
         }
-        
+
         ListNode secondLast = head;
         while (secondLast.next.next != null) {
             secondLast = secondLast.next;
         }
         secondLast.next = null;
         return head;
-        
+
     }
-    
-    
+
     /**
      * Delete the first node whose info is equal to x
-     * @param x 
+     *
+     * @param x
      */
     public void deleteFirstNode(int x) {
         //Check if the list is empty
         if (head == null) {
             return;
         }
-        
+
         if (head.data == x) {
             head = head.next;
             return;
         }
     }
-    
+
     /**
      * Search and return the reference to the first node having info x
+     *
      * @param x
-     * @return 
+     * @return
      */
     public ListNode search(int x) {
         ListNode current = head;
@@ -232,14 +232,15 @@ public class SinglyLinkedList {
             if (current.data == x) {
                 return current; // Return the reference to the first node with data x
             }
-            current = current.next; 
+            current = current.next;
         }
         return null; // Node with data x not found
     }
-    
-     /**
+
+    /**
      * Count the number of nodes in list.
-     * @return 
+     *
+     * @return
      */
     public int count() {
         if (head == null) {
@@ -247,22 +248,22 @@ public class SinglyLinkedList {
         }
         ListNode current = head;
         int count = 0; //Count = 0 because we want to assume that there is no node intially, then count up to 1, 2,3..
-                       //If we count from 1, we assume there is 1 node already so it's wrong
+        //If we count from 1, we assume there is 1 node already so it's wrong
         while (current != null) {
             count++;
             current = current.next;
         }
         return count;
     }
-    
-     public void delete2(int x) {
+
+    public void delete2(int x) {
         //Position is valid and starting from 1
         //3 -> 4 -> 7 -> 8 -> 9 -> null
 
         //Check if the list is empty
         if (head == null) {
             System.err.println("The list is empty. Nothing to print out!!!"); // I use System.err instead because it will print the red messages in the output
-                                                                              // which I think it would be cool!!!.
+            // which I think it would be cool!!!.
             return;
         }
 
@@ -286,44 +287,74 @@ public class SinglyLinkedList {
 
         previous.next = previous.next.next;
     }
-    
-     public void remove(ListNode p) {
+
+    public void remove(ListNode p) {
         if (head == null || p == null) {
             System.err.println("Nothing to remove!");
             return;
         }
-        
+
         //Special case: If Node p is in the first node, shift it toward 1 node, and delete the node before.
         if (head == p) {
             head = head.next;
             return;
-                  
+
         }
-        
+
         ListNode current = head;
         while (current != null && current != p) {
             current = current.next;
         }
-        
+
         if (current == null) {
             System.err.println("Not found!");
             return;
         }
-        
+
         current.next = current.next.next;
     }
+
+    /**
+     * Sort the list by ascending order of info.
+     */
+    public void sort() {
+        // Node current will point to head, index will point to the next position of current
+        ListNode current = head, index = null;
+        int temp;
+        // If the list is empty or has only one element, it is already sorted.
+        if (head == null || head.next == null) {
+            return;
+        } else {
+            // Node index will point to node next to
+            // current
+            while (current != null) {
+                index = current.next;
+
+                while (index != null) {
+                    if (current.data > index.data) {
+                        temp = current.data;
+                        current.data = index.data;
+                        index.data = temp;
+                    }
+                    index = index.next;
+                }
+                current = current.next;
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         // TODO code application logic here
         SinglyLinkedList myLinkedList = new SinglyLinkedList();
-        
-        
+
         myLinkedList.insertLast(11);
         myLinkedList.insertLast(8);
         myLinkedList.insertLast(1);
         myLinkedList.insertLast(2);
-        
+
         myLinkedList.display();
-        
+
     }
 
 }
