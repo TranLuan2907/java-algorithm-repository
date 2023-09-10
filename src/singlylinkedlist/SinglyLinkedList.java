@@ -168,8 +168,10 @@ public class SinglyLinkedList {
         myLinkedList.insertLast(11);
         myLinkedList.insertLast(8);
         myLinkedList.insertLast(1);
+        myLinkedList.insertLast(2);
         
         myLinkedList.display();
+        
     }
 
 }
