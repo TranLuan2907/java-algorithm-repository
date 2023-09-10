@@ -171,7 +171,147 @@ public class SinglyLinkedList {
         }
         System.out.println(); //Print a newline to separate output from the program
     }
+    
+    
+    public ListNode deleteFirst() {
+        if (head == null) {
+            return null;
+        }
+        
+        ListNode temp = head;
+        head = head.next;
+        return head; 
+        
+    }
+    
+    public ListNode deleteLast() {
+        //Check if the list is empty
+        if (head == null) {
+            return null;
+        }
+        
+        //Check if the list contains only 1 node
+        if (head.next == null) {
+            return null;
+        }
+        
+        ListNode secondLast = head;
+        while (secondLast.next.next != null) {
+            secondLast = secondLast.next;
+        }
+        secondLast.next = null;
+        return head;
+        
+    }
+    
+    
+    /**
+     * Delete the first node whose info is equal to x
+     * @param x 
+     */
+    public void deleteFirstNode(int x) {
+        //Check if the list is empty
+        if (head == null) {
+            return;
+        }
+        
+        if (head.data == x) {
+            head = head.next;
+            return;
+        }
+    }
+    
+    /**
+     * Search and return the reference to the first node having info x
+     * @param x
+     * @return 
+     */
+    public ListNode search(int x) {
+        ListNode current = head;
+        while (current != null) {
+            if (current.data == x) {
+                return current; // Return the reference to the first node with data x
+            }
+            current = current.next; 
+        }
+        return null; // Node with data x not found
+    }
+    
+     /**
+     * Count the number of nodes in list.
+     * @return 
+     */
+    public int count() {
+        if (head == null) {
+            return 0; //If the list is empty, return 0 indicates there is not list
+        }
+        ListNode current = head;
+        int count = 0; //Count = 0 because we want to assume that there is no node intially, then count up to 1, 2,3..
+                       //If we count from 1, we assume there is 1 node already so it's wrong
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+    
+     public void delete2(int x) {
+        //Position is valid and starting from 1
+        //3 -> 4 -> 7 -> 8 -> 9 -> null
 
+        //Check if the list is empty
+        if (head == null) {
+            System.err.println("The list is empty. Nothing to print out!!!"); // I use System.err instead because it will print the red messages in the output
+                                                                              // which I think it would be cool!!!.
+            return;
+        }
+
+        //Special case: If the position is 1 (first node)
+        if (x == 1) {
+            head = head.next;
+            return;
+        }
+        ListNode previous = head; //Create a temporary previous node in order to keep track of the list
+
+        // Traverse the list to find the node just before the one to be deleted.  
+        for (int i = 1; previous != null && i < x - 1; i++) {
+            previous = previous.next;
+        }
+
+        //Check if it is out of bounds.
+        if (previous == null || previous.next == null) {
+            System.err.println("Out of bound!!!");
+            return;
+        }
+
+        previous.next = previous.next.next;
+    }
+    
+     public void remove(ListNode p) {
+        if (head == null || p == null) {
+            System.err.println("Nothing to remove!");
+            return;
+        }
+        
+        //Special case: If Node p is in the first node, shift it toward 1 node, and delete the node before.
+        if (head == p) {
+            head = head.next;
+            return;
+                  
+        }
+        
+        ListNode current = head;
+        while (current != null && current != p) {
+            current = current.next;
+        }
+        
+        if (current == null) {
+            System.err.println("Not found!");
+            return;
+        }
+        
+        current.next = current.next.next;
+    }
     public static void main(String[] args) {
         // TODO code application logic here
         SinglyLinkedList myLinkedList = new SinglyLinkedList();
