@@ -159,6 +159,18 @@ public class SinglyLinkedList {
         System.out.println(" null");
         System.out.println();
     }
+    
+    /**
+     * Traverse a list
+     */
+    public void traverse() {
+        ListNode current = head;
+        while (current.next != null) {
+            System.out.println(current.data + " ");
+            current = current.next;
+        }
+        System.out.println(); //Print a newline to separate output from the program
+    }
 
     public static void main(String[] args) {
         // TODO code application logic here
