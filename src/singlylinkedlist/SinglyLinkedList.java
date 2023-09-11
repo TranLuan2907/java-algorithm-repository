@@ -32,6 +32,7 @@ public class SinglyLinkedList {
     }
 
     public static class ListNode {
+        private ListNode head;
 
         private int data;       //This attributes are set private because it hides internal details of
         //a class and only expose only the necessary information - Encapsulation.
@@ -463,7 +464,7 @@ public class SinglyLinkedList {
      * If one data of the current node is not equal the other node, return false
      * Return true if both of them are identical.
      * In this method, I will use both iterative and recursive method.
-     * @param b
+     * @param
      * @return 
      */
      public boolean areIdentical(ListNode head1, ListNode head2) {
@@ -495,7 +496,52 @@ public class SinglyLinkedList {
         if (head1.data != head2.data) return false;
         return areIdentical(head1.next , head2.next);
     }
-    
+
+    public void addBefore(ListNode p, int x) {
+
+        ListNode newNode = new ListNode(x);
+
+        // Handle the case where p is the head of the list.
+        if (head == p) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        ListNode current = head;
+        ListNode previous = null;
+
+        // Traverse the list to find the node before p.
+        while (current != null && current != p) {
+            previous = current;
+            current = current.next;
+        }
+
+        // If p was not found, return or throw an error.
+        if (current == null) {
+            System.err.println("Node p not found in the list.");
+            return;
+        }
+        previous.next = newNode;
+        newNode.next = p;
+    }
+
+    public void attachLinkedList(ListNode secondList) {
+        // If the first list is empty, simply set the head to the head of the second list.
+        if (head == null) {
+            head = secondList.head;
+            return;
+        }
+
+        // Find the last node of the first list.
+        ListNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // Attach the second list by updating the 'next' of the last node.
+        current.next = secondList.head;
+    }
 
     public static void main(String[] args) {
         // TODO code application logic here
